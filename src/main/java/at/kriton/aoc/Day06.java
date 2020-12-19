@@ -5,7 +5,7 @@ import static java.util.Collections.emptySet;
 import static java.util.stream.Collectors.toList;
 
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -13,10 +13,11 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 public class Day06 {
+	static final Path INPUT = AOCUtils.PUZZLE_INPUTS.resolve("input06.txt");
 
 	public static void main(String[] args) throws IOException {
 		List<String> lines = Stream
-				.of(readString(Paths.get(args[0])).replaceAll("(?<!\\n)\\n(?!\\n)", " ").split("\\n{2,}"))
+				.of(readString(INPUT).replaceAll("(?<!\\n)\\n(?!\\n)", " ").split("\\n{2,}"))
 				.collect(toList());
 		long sumPart1 = lines.stream().mapToLong(line -> line.chars().filter(c -> ' ' != c).distinct().count()).sum();
 
@@ -27,7 +28,7 @@ public class Day06 {
 		System.out.format("part02: %d", sumPart2);
 	}
 
-	static Set<Integer> intersect(Stream<? extends Collection<Integer>> stream) {
+	static <T> Set<T> intersect(Stream<? extends Collection<T>> stream) {
 		return intersect(stream.collect(toList()));
 	}
 

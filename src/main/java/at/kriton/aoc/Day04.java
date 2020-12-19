@@ -4,7 +4,7 @@ import static java.nio.file.Files.readString;
 import static java.util.stream.Collectors.toList;
 
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,12 +15,14 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class Day04 {
-	static final Pattern PASSPORT_GROUPS = Pattern.compile("\\s*([^\\s]*?):([^\\s]*)\\s*");
+	static final Path INPUT = AOCUtils.PUZZLE_INPUTS.resolve("input04.txt");
+
+	static final Pattern PASSPORT_GROUPS = Pattern.compile("\\s*(\\S*?):(\\S*)\\s*");
 	static final Set<String> REQUIRED_FIELDS = Set.of("byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid");
 
 	public static void main(String[] args) throws IOException {
 		List<Map<String, String>> passports = Stream
-				.of(readString(Paths.get(args[0])).replaceAll("(?<!\\n)\\n(?!\\n)", " ").split("\\n{2,}"))
+				.of(readString(INPUT).replaceAll("(?<!\\n)\\n(?!\\n)", " ").split("\\n{2,}"))
 				.map(Day04::passportEntries).collect(toList());
 		long validPassportsPart1Count = passports.stream().filter(Day04::isValidPassportPart1).count();
 		long validPassportsPart2Count = passports.stream().filter(Day04::isValidPassportPart2).count();

@@ -3,12 +3,13 @@ package at.kriton.aoc;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Day02 {
+	static final Path INPUT = AOCUtils.PUZZLE_INPUTS.resolve("input02.txt");
+
 	static final Pattern POLICY_PASSWORD_PATTERN = Pattern.compile("(\\d+)-(\\d+) ([a-z]): ([a-z]+)");
 
 	static class PasswordPolicy1 {
@@ -69,9 +70,7 @@ public class Day02 {
 	}
 
 	public static void main(String[] args) throws IOException {
-		Path path = Paths.get(args[0]);
-
-		List<String> lines = Files.readAllLines(path);
+		List<String> lines = Files.readAllLines(INPUT);
 		long validPasswordPolicy1 = lines.stream().filter(Day02::isValidPasswordPolicy1).count();
 		long validPasswordPolicy2 = lines.stream().filter(Day02::isValidPasswordPolicy2).count();
 

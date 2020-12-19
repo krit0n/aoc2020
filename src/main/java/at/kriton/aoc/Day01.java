@@ -1,24 +1,24 @@
 package at.kriton.aoc;
 
+import static java.util.stream.Collectors.toList;
+
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Day01 {
+	static final int SUM = 2020;
+	static final Path INPUT = AOCUtils.PUZZLE_INPUTS.resolve("input01.txt");
 
 	public static void main(String[] args) throws IOException {
-		String sum = args[0];
-		String path = args[1];
+		try (Stream<String> lines = Files.lines(INPUT)) {
+			List<Integer> numbers = lines.map(Integer::valueOf).collect(toList());
 
-		try (Stream<String> lines = Files.lines(Paths.get(path))) {
-			List<Integer> numbers = lines.map(Integer::valueOf).collect(Collectors.toList());
-
-			System.out.format("part01: %d%n", part01(Integer.valueOf(sum), numbers));
-			System.out.format("part02: %d", part02(Integer.valueOf(sum), numbers));
+			System.out.format("part01: %d%n", part01(SUM, numbers));
+			System.out.format("part02: %d", part02(SUM, numbers));
 		}
 	}
 
