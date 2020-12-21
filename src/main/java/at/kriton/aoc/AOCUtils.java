@@ -22,10 +22,10 @@ public class AOCUtils {
 	}
 
 	/**
-	 * multiplicative inverse via extended euclidean algorithm. satisfies:
+	 * multiplicative inverse (mod b) via extended euclidean algorithm. satisfies:
 	 * 
 	 * <pre>
-	 * mod b mulInv(a,b) * a == 1 mod b
+	 * mulInv(a,b) * a == 1 mod b
 	 * </pre>
 	 */
 	public static long mulInv(long a, long b) {
