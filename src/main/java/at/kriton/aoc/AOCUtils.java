@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class AOCUtils {
 	public static final Path PUZZLE_INPUTS = Paths.get(AOCUtils.class.getClassLoader().getResource("input").getPath());
-	
+
 	public static long chineseRemainder(Map<Integer, Integer> modAndRemainder) {
 
 		long prod = modAndRemainder.keySet().stream().map(Integer::longValue).reduce(1L, (i, j) -> i * j);
@@ -22,16 +22,20 @@ public class AOCUtils {
 	}
 
 	/**
-	 * multiplicative inverse mod b
-	 * mulInv(a,b) * a == 1 mod b
+	 * multiplicative inverse via extended euclidean algorithm. satisfies:
+	 * 
+	 * <pre>
+	 * mod b mulInv(a,b) * a == 1 mod b
+	 * </pre>
 	 */
 	public static long mulInv(long a, long b) {
 		long b0 = b;
 		long x0 = 0;
 		long x1 = 1;
 
-		if (b == 1)
+		if (b == 1) {
 			return 1;
+		}
 
 		while (a > 1) {
 			long q = a / b;
@@ -48,5 +52,9 @@ public class AOCUtils {
 		}
 
 		return x1;
+	}
+
+	private AOCUtils() {
+		// no-op
 	}
 }

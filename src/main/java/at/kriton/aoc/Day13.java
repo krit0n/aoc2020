@@ -16,10 +16,10 @@ public class Day13 {
 		int departTime = Integer.parseInt(lines.get(0));
 		Map<Integer, Integer> busIdToOffset = busIdToOffset(lines.get(1).split(","));
 
-		long minWaitTime = Integer.MAX_VALUE;
-		long minWaitTimeId = 0;
-		for (long id : busIdToOffset.keySet()) {
-			long waitTime = (-departTime % id) + id;
+		int minWaitTime = Integer.MAX_VALUE;
+		int minWaitTimeId = 0;
+		for (int id : busIdToOffset.keySet()) {
+			int waitTime = (-departTime % id) + id;
 			if (waitTime < minWaitTime) {
 				minWaitTime = waitTime;
 				minWaitTimeId = id;
